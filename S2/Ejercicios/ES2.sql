@@ -33,8 +33,53 @@ Obten el máximo, mínimo y promedio del número de productos en las órdenes de
 
 Dentro de la tabla orders, obten el número de órdenes que hay por cada estado.
 */
-USE classicmodels;
-
+#1
+SELECT employeeNumber, lastName, firstName
+FROM employees
+WHERE firstName LIKE 'A%';
+#2
+SELECT employeeNumber, lastName, firstName 
+FROM employees
+WHERE lastName LIKE '%on';
+#3
+SELECT employeeNumber,lastname,firstname 
+FROM employees WHERE firstname LIKE '%on%';
+#4
+SELECT employeeNumber, lastName, firstName 
+FROM employees
+WHERE firstName LIKE 'G_____';
+#5
+SELECT employeeNumber, lastName, firstName 
+FROM employees
+WHERE firstName NOT LIKE 'B%';
+#6
+SELECT productCode, productName FROM products
+WHERE productCode LIKE '%_20%';
+#7
+SELECT orderNumber, SUM(priceEach) FROM orderdetails
+GROUP BY orderNumber;
+#8
 SELECT YEAR(orderDate), count(*)
 FROM orders
 GROUP BY YEAR(orderDate);
+#9
+select lastName,firstName from employees where officeCode IN 
+(select officeCode from offices where country = 'USA');
+#10
+ SELECT customerNumber, checkNumber, amount FROM payments ORDER BY amount DESC LIMIT 1; 
+#11
+
+#12
+
+SELECT customerName 
+FROM customers
+WHERE customerNumber NOT IN 
+   (SELECT customerNumber
+   FROM orders);
+#13
+
+
+#14
+SELECT (SELECT state FROM customers WHERE customerNumber = o.customerNumber) AS state, count(*) AS num_orders 
+FROM orders as o
+GROUP BY state;
