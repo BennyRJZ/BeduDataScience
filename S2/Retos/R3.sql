@@ -32,6 +32,6 @@ FROM venta
 GROUP BY id_empleado;
 
 #¿Cuál es el número total de ventas por artículo?
-SELECT id_articulo, count(id_empleado) as TotalVentas
+SELECT id_articulo, count(*) as TotalVentas
 FROM venta
 GROUP BY id_articulo;

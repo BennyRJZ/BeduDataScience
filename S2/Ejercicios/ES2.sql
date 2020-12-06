@@ -68,6 +68,9 @@ select lastName,firstName from employees where officeCode IN
 #10
  SELECT customerNumber, checkNumber, amount FROM payments ORDER BY amount DESC LIMIT 1; 
 #11
+SELECT customerNumber, checkNumber, amount
+FROM payments
+WHERE amount > (SELECT avg(amount) FROM payments);
 
 #12
 
@@ -77,6 +80,8 @@ WHERE customerNumber NOT IN
    (SELECT customerNumber
    FROM orders);
 #13
+SELECT max(quantityOrdered), min(quantityOrdered), avg(quantityOrdered)
+FROM orderdetails;
 
 
 #14
