@@ -7,6 +7,8 @@ JOIN empleado e
   ON v.id_empleado = e.id_empleado
 JOIN articulo a
   ON v.id_articulo = a.id_articulo);
+  
+  
   ##Obtener el puesto de un empleado.
 CREATE VIEW benny1_095 AS (
 SELECT e.id_empleado, e.nombre, e.apellido_paterno, e.apellido_materno, p.nombre AS 'Puesto'
@@ -14,6 +16,10 @@ FROM empleado AS e
 JOIN puesto AS p
 ON p.id_puesto = e.id_puesto
 ORDER BY id_empleado);
+
+SELECT *
+FROM benny1_095;
+
 #Saber qué artículos ha vendido cada empleado.
 CREATE VIEW benny2_095 AS (
 SELECT v.clave AS 'clave', e.id_empleado 'id_empleado', CONCAT(e.nombre,' ',
@@ -24,6 +30,11 @@ ON  v.id_empleado = e.id_empleado
 JOIN articulo a
 ON v.id_articulo = a.id_articulo
 ORDER BY v.clave);
+
+SELECT *
+FROM benny2_095;
+
+
 #Saber qué puesto ha tenido más ventas.
 
 CREATE VIEW benny3_095 AS (
@@ -35,3 +46,7 @@ JOIN puesto p
 ON e.id_puesto = p.id_puesto
 GROUP BY p.nombre
  );
+SELECT *
+FROM benny3_095
+ORDER BY totalVentas DESC
+LIMIT 1;
