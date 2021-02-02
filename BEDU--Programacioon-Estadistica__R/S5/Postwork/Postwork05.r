@@ -49,5 +49,44 @@ write.csv(x = SmallData, file = "soccer.csv", row.names = FALSE)
 # al mismo tiempo asignelo a una variable llamada listasoccer. Se creará una lista con los elementos 
 # scores y teams que son data frames listos para la función rank.teams. Asigna estos data frames a 
 # variables llamadas anotaciones y equipos.
+### Creacion de ListaSoccer
+soccerFile = "/Users/benny/Documents/BeduDataScience/BEDU--Programacioon-Estadistica__R/S5/Postwork/soccer.csv"
+listasoccer <- create.fbRanks.dataframes(scores.file = soccerFile)
+
+##Dataframes anotaciones y equipos
+anotaciones <- listasoccer$scores
+equipos <- listasoccer$teams
 
 
+###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   
+###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   
+###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   
+#3.
+# 
+# Con ayuda de la función unique crea un vector de fechas (fecha) que no se repitan y que correspondan 
+# a las fechas en las que se jugaron partidos. Crea una variable llamada n que contenga el número de fechas
+# diferentes. Posteriormente, con la función rank.teams y usando como argumentos los data frames anotaciones
+# y equipos, crea un ranking de equipos usando unicamente datos desde la fecha inicial y hasta la penúltima
+# fecha en la que se jugaron partidos, estas fechas las deberá especificar en max.date y min.date. 
+# Guarda los resultados con el nombre ranking.
+
+
+# VECTOR FECHAS unicas
+fecha <- unique(anotaciones$date)
+
+#Numero de fechas diferentes
+n <- length(fecha)
+# Ranking entre la primera fecha min.date=fecha[1]y la penultima max.date=fecha[n-1]
+ranking <- rank.teams(scores = anotaciones, teams = equipos, max.date = fecha[n-1], min.date = fecha[1])
+
+###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   
+###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   
+###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   
+#4.
+# #
+# Finalmente estima las probabilidades de los eventos, el equipo de casa gana, el equipo visitante gana o el
+# resultado es un empate para los partidos que se jugaron en la última fecha del vector de fechas fecha. 
+# Esto lo puedes hacer con ayuda de la función predict y usando como argumentos ranking y fecha[n] que deberá
+# especificar en date.
+
+estimacion <- predict(ranking, date = fecha[n])
